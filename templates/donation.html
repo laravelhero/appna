@@ -1,0 +1,27 @@
+{% extends '_main.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+ Donation
+{% endblock %} 
+{% block content %}
+<div class="container my-5">
+  <div class="card mb-5 p-1" style="background-color: #FFF3CD">
+    <div class="card-body">
+      <h5 class="card-title">APPNA STC | PAYMENT</h5>
+      <p class="card-text">
+        You can make a payment with or without signing in as an APPNA SOUTH TEXAS CHAPTER member. If you opt to payment by logging in, your payment statement will be archived on your dashboard. <a href="/admin">Click Here To LOGIN</a>
+      </p>
+    </div>
+  </div>
+  <div class="col-lg-12 card mb-3 p-1" >
+      <div class="card-body">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form | crispy }}
+          <button type="submit" class="btn btn-primary">Checkout</button>
+      </form>
+  </div>
+</div>
+</div>
+{% endblock %}
