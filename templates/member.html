@@ -8,11 +8,74 @@
   <h5 class="card-title">BECOME A MEMBER</h5>
   <div class="col-lg-12 card mb-3 p-1" >
       <div class="card-body">
-          <form method="POST">
-              {% csrf_token %}
-              {{ form | crispy }}
-              <button type="submit" class="btn btn-primary">Checkout</button>
-          </form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row py-1">
+              <div class="form-group col-md-2 mb-0">
+                {{ form.prefix|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-5 mb-0">
+                {{ form.full_name|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-5 mb-0">
+                {{ form.email|as_crispy_field }}
+              </div>
+            </div>  
+            <div class="row py-1">
+              <div class="form-group col-md-4 mb-0">
+                {{ form.phone|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.home_phone|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.office_phone|as_crispy_field }}
+              </div>
+            </div>            
+            <div class="row py-1">
+              <div class="form-group col-md-8 mb-0 row-3">
+                {{ form.location|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0 row-3">
+                {{ form.other_location|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row py-1">
+              <div class="form-group col-md-4 mb-0">
+                {{ form.city|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.state|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.zip_code|as_crispy_field }}
+              </div>
+            </div>  
+            <div class="row py-1">
+              <div class="form-group col-md-4 mb-0">
+                {{ form.country|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.medical|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.year_of_graduation|as_crispy_field }}
+              </div>              
+            </div>
+            <div class="row py-1">
+              <div class="form-group col-md-4 mb-0">
+                {{ form.membership_type|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.profile_photo|as_crispy_field }}
+              </div>
+              <div class="form-group col-md-4 mb-0">
+                {{ form.license|as_crispy_field }}
+              </div>
+            </div>
+            
+              <button type="submit" class="btn btn-primary btn-lg px-20 py-3 ">Checkout</button>
+          </form> 
       </div>        
   </div>
 </div>
