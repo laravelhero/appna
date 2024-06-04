@@ -1,4 +1,5 @@
 from django.db import models
+from prefix_id import PrefixIDField
 
 class Member(models.Model):
     PREFIX = {
@@ -29,8 +30,10 @@ class Member(models.Model):
         "Others": "Others",
     }
     MEMBERSHIP_TYPE = {
-        100: "Lifetime Member ($100)",
+        "LM" : "Lifetime Member ($100)",
     }
+    
+    id = PrefixIDField(prefix="APP1", primary_key=True)
     prefix = models.CharField(max_length=2, choices=PREFIX, default=PREFIX['DR'])
     full_name = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=30, null=True)
@@ -45,7 +48,7 @@ class Member(models.Model):
     country = models.CharField(max_length=20, choices=COUNTRY, default=COUNTRY['US'])
     medical = models.CharField(max_length=20, choices=MEDICAL, null=True)
     year_of_graduation = models.CharField(max_length=15, null=True)
-    membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_TYPE, default=MEMBERSHIP_TYPE[100])
+    membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_TYPE, default=MEMBERSHIP_TYPE["LM"])
     profile_photo = models.ImageField(default='profile-pic.jpg', upload_to='member', blank=True, null=True)
     license = models.ImageField(blank=True,upload_to='member/license', null=True)
     password = models.CharField(max_length=100, null=True)
@@ -57,6 +60,7 @@ class Member(models.Model):
         verbose_name = "1. Member List"
     
 class Donation(models.Model):
+    id = PrefixIDField(prefix="APP1", primary_key=True)
     full_name = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=30, null=True)
     phone = models.CharField(max_length=30, null=True)     
