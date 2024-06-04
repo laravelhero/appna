@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
@@ -39,34 +39,36 @@ def checkout(request):
             request.session['form_type'] = form_type
 
 
-        if form_type == 'donation':
-            paypal_form = DonationPayPalPaymentsForm(initial=paypal_dict)
-        else:
-            paypal_form = MemberPayPalPaymentsForm(initial=paypal_dict)
+        # if form_type == 'donation':
+        #     paypal_form = DonationPayPalPaymentsForm(initial=paypal_dict)
+        # else:
+        #     paypal_form = MemberPayPalPaymentsForm(initial=paypal_dict)
 
-        context = {
-            "paypal_form": paypal_form,
-            "amount": amount,
-            "form": form,
-            "form_type": form_type,
-        }
+        # context = {
+        #     "paypal_form": paypal_form,
+        #     "amount": amount,
+        #     "form": form,
+        #     "form_type": form_type,
+        # }
 
-        return render(request, 'payments/checkout.html', context)
-
+        # return render(request, 'payments/checkout.html', context)
+        return redirect("payments:payment_success")
     else:
         form_type = request.session.get('form_type', 'donation')
         
         if form_type == 'donation':
             form = DonationForm()
-            template = 'donation.html'
+            template = 'app/donation.html'
         else:
             form = MemberForm()
-            template = 'member.html'
+            template = 'app/member.html'
 
         return render(request, template, {'form': form})
 
 
 def payment_success(request):
+    print("HEllo....................................")    
+    print(request.session.get('form')) 
     if request.method == 'GET' and 'form' in request.session:
         if(request.session.get('form_type')=='donation'):
             form = DonationForm(request.session.get('form'))
@@ -74,8 +76,9 @@ def payment_success(request):
         else:
             form = MemberForm(request.session.get('form'))
     
-            User.objects.create_user(username='shafayet@gmail.com', password='testing321')
+            User.objects.create_user(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
             form.save()
+        
 
         del request.session['form']
         del request.session['form_type']
