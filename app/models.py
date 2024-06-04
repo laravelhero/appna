@@ -14,6 +14,19 @@ class Member(models.Model):
     MEDICAL = {
         "DMC": "Dow Medical College",
         "SMC": "Sindh Medical College",
+        "AKMC": "Aga Khan Medical College",
+        "BMC": "Baqai Medical College",
+        "KMDC": "Karachi Medical and Dental College",
+        "ZMC": "Ziauddin Medical College",
+        "JMC": "Jamshoro Medical College",
+        "KEMC": "King Edward Medical College",
+        "AIMC": "Allama Iqbal Medical College",
+        "FJMC": "Fatima Jinnah Medical College",
+        "RMC": "Rawalpindi Medical College",
+        "NMC": "Nishtar Medical College",
+        "AMC": "Ayub Medical College",
+        "BMC": "Bolan Medical College",
+        "Others": "Others",
     }
     MEMBERSHIP_TYPE = {
         100: "Lifetime Member ($100)",
