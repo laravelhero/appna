@@ -15,17 +15,8 @@
     </div>
   </div>
   <div class="col-lg-12 card mb-3 p-1" >
-<<<<<<< HEAD
-      <div class="card-body">
-        <form method="POST" action="{% url 'payments:checkout' %}">
-          {% csrf_token %}
-          {{ form | crispy }}
-          <input type="hidden" name="form_type" value="donation">
-          <button type="submit" class="btn btn-primary">Checkout</button>
-      </form>
-=======
     <div class="card-body">
-      <form method="post">
+      <form method="POST" action="{% url 'payments:checkout' %}">
         {% csrf_token %}    
         {{ form.full_name|as_crispy_field }}
         <div class="row">
@@ -42,10 +33,10 @@
         <div class="form-group col-md-12 mb-0 row-3">
           {{ form.purpose|as_crispy_field }}
         </div>
-          <button type="submit" class="btn btn-primary btn-lg px-20 py-3 ">Sign in</button>
+        <input type="hidden" name="form_type" value="donation">
+        <button type="submit" class="btn btn-primary">Checkout</button>
       </form> 
     </div> 
->>>>>>> 71303fa420a87a0ef5bd92566a0f8e49532d42b6
   </div>
 </div>
 {% endblock %}
