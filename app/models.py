@@ -48,6 +48,7 @@ class Member(models.Model):
     membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_TYPE, default=MEMBERSHIP_TYPE[100])
     profile_photo = models.ImageField(default='profile-pic.jpg', upload_to='member', blank=True, null=True)
     license = models.ImageField(blank=True,upload_to='member/license', null=True)
+    password = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.full_name
