@@ -35,7 +35,7 @@ def checkout(request):
         }
 
         if form.is_valid():
-            request.session['form'] = form
+            request.session['form_data'] = form.cleaned_data
             request.session['form_type'] = form_type
 
             if form_type == 'donation':
@@ -51,7 +51,6 @@ def checkout(request):
             }
 
             return render(request, 'payments/checkout.html', context)
-
 
         if form_type == 'donation':
             template = 'app/donation.html'
