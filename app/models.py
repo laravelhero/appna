@@ -16,7 +16,7 @@ class Member(models.Model):
         "SMC": "Sindh Medical College",
     }
     MEMBERSHIP_TYPE = {
-        "LM": "Lifetime Member ($100)",
+        100: "Lifetime Member ($100)",
     }
     prefix = models.CharField(max_length=2, choices=PREFIX, default=PREFIX['DR'])
     full_name = models.CharField(max_length=50, null=True)
@@ -32,9 +32,9 @@ class Member(models.Model):
     country = models.CharField(max_length=20, choices=COUNTRY, default=COUNTRY['US'])
     medical = models.CharField(max_length=20, choices=MEDICAL, null=True)
     year_of_graduation = models.CharField(max_length=15, null=True)
-    membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_TYPE, default=MEMBERSHIP_TYPE["LM"])
-    profile_photo = models.ImageField(default='profile-pic.jpg', blank=True, null=True)
-    license = models.ImageField(blank=True, null=True)
+    membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_TYPE, default=MEMBERSHIP_TYPE[100])
+    profile_photo = models.ImageField(default='profile-pic.jpg', upload_to='member', blank=True, null=True)
+    license = models.ImageField(blank=True,upload_to='member/license', null=True)
 
     def __str__(self):
         return self.full_name

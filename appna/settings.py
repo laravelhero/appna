@@ -28,11 +28,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'app.apps.AppConfig', #Application
+    'payments.apps.PaymentsConfig',
 
     'import_export', #new
 
     "crispy_forms",
     "crispy_bootstrap5",
+    'paypal.standard.ipn',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -131,3 +133,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Paypal Config
+PAYPAL_TEST = True

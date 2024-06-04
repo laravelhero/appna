@@ -8,9 +8,10 @@
   <h5 class="card-title">BECOME A MEMBER</h5>
   <div class="col-lg-12 card mb-3 p-1" >
       <div class="card-body">
-          <form method="POST">
-              {% csrf_token %}
+        <form method="POST" action="{% url 'payments:checkout' %}">
+        {% csrf_token %}
               {{ form | crispy }}
+              <input type="hidden" name="form_type" value="member">
               <button type="submit" class="btn btn-primary">Checkout</button>
           </form>
       </div>        
