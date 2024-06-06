@@ -1,5 +1,4 @@
 from django.db import models
-from prefix_id import PrefixIDField
 
 class Member(models.Model):
     PREFIX = {
