@@ -33,10 +33,9 @@ class Member(models.Model):
         "LM" : "Lifetime Member ($100)",
     }
     
-    id = PrefixIDField(prefix="APP1", primary_key=True)
     prefix = models.CharField(max_length=2, choices=PREFIX, default=PREFIX['DR'])
     full_name = models.CharField(max_length=50, null=True)
-    email = models.EmailField(max_length=30, null=True)
+    email = models.EmailField(max_length=30, unique=True, null=True)
     phone = models.CharField(max_length=15, null=True)
     home_phone = models.CharField(max_length=15, blank=True, null=True)
     office_phone = models.CharField(max_length=15, blank=True, null=True)
@@ -50,25 +49,37 @@ class Member(models.Model):
     year_of_graduation = models.CharField(max_length=15, null=True)
     membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_TYPE, default=MEMBERSHIP_TYPE["LM"])
     profile_photo = models.ImageField(default='profile-pic.jpg', upload_to='member', blank=True, null=True)
-    license = models.ImageField(blank=True,upload_to='member/license', null=True)
+    license = models.ImageField(upload_to='member/license', blank=True, null=True)
+    is_paid = models.BooleanField(default=False)
     password = models.CharField(max_length=100, null=True)
-
+    member_from = models.DateTimeField(auto_now_add=True, null=True) # created_at
+    updated_at = models.DateTimeField(auto_now=True, null=True)
     def __str__(self):
         return self.full_name
     
     class Meta:
         verbose_name = "1. Member List"
+        ordering = ["-id"]
+
+
+    @property
+    def modified_date(self):
+        return  self.member_from.strftime("%m-%d-%Y")
+
     
 class Donation(models.Model):
-    id = PrefixIDField(prefix="APP1", primary_key=True)
+    # donor_id = PrefixIDField(prefix="APP1")
     full_name = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=30, null=True)
     phone = models.CharField(max_length=30, null=True)     
     purpose = models.CharField(max_length=100, null=True)
     amount = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
     
     def __str__(self):
         return self.full_name
     
     class Meta:
         verbose_name = "2. Donor List"
+        ordering = ["-id"]

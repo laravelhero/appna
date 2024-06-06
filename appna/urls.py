@@ -12,7 +12,7 @@ urlpatterns = [
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 admin.site.site_header = "APPNA South Texas Chapter"
 admin.site.site_title = "APPNA Admin Portal"

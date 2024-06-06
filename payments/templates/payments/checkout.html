@@ -7,3 +7,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Push a new state to the history stack
+        history.pushState(null, null, location.href);
+
+        // Add an event listener to detect when the user navigates back
+        window.addEventListener('popstate', function(event) {
+            // Push the same state to the history stack to prevent back navigation
+            history.pushState(null, null, location.href);
+        });
+    });
+</script>
